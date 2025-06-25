@@ -11,7 +11,7 @@ interface MessageProps {
 export const getConversationsApi = async () => {
 
     const res  = await fetchApi({
-        url: '/api/conversations',
+        url: `${import.meta.env.VITE_API_URL}/conversations`,
         method: 'GET'
     })
 
@@ -22,7 +22,7 @@ export const getConversationsApi = async () => {
 export const getMessagesApi = async (receiverId: string) => {
     
     const res = await fetchApi({
-        url: `/api/messages/list/${receiverId}`,
+        url: `${import.meta.env.VITE_API_URL}/messages/list/${receiverId}`,
         method: 'GET'
     })
 
@@ -32,7 +32,7 @@ export const getMessagesApi = async (receiverId: string) => {
 export const sendMessageApi = async (props: MessageProps) => {
 
     const res = await fetchApi({
-        url: `/api/messages/send`,
+        url: `${import.meta.env.VITE_API_URL}/messages/send`,
         method: 'POST',
         data: props.data
     })
@@ -42,7 +42,7 @@ export const sendMessageApi = async (props: MessageProps) => {
 
 export const updateMessageStatusApi = async (messageId: string) => {
     const res = await fetchApi({
-        url: `/api/messages/update-status`,
+        url: `${import.meta.env.VITE_API_URL}/messages/update-status`,
         method: 'POST',
         data: {
             messageId: messageId

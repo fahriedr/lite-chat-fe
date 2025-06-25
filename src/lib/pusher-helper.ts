@@ -1,16 +1,16 @@
-const Pusher = require("pusher")
-const PusherClient = require("pusher-js")
-require('dotenv').config()
+import Pusher from "pusher";
+import PusherClient from "pusher-js";
+
 export const pusherServer = new Pusher({
-    appId: process.env.NEXT_PUBLIC_PUSHER_APP_ID!,
-    key: process.env.NEXT_PUBLIC_PUSHER_KEY!,
-    secret: process.env.NEXT_PUBLIC_PUSHER_SECRET!,
-    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
+    appId: import.meta.env.VITE_PUSHER_APP_ID!,
+    key: import.meta.env.VITE_PUSHER_KEY!,
+    secret: import.meta.env.VITE_PUSHER_SECRET!,
+    cluster: import.meta.env.VITE_PUSHER_CLUSTER!,
 })
 
 export const pusherClient = new PusherClient(
-    process.env.NEXT_PUBLIC_PUSHER_KEY!,
+    import.meta.env.VITE_PUSHER_KEY!,
     {
-        cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!
+        cluster: import.meta.env.VITE_PUSHER_CLUSTER!
     }
 )

@@ -137,9 +137,8 @@ export const getPlainId = async (id: Object) => {
 //     }, {status: statusCode})
 // }
 
-export const setCookies = async (token: string, user: UserType) => {
-    Cookies.set('token', token)
-    Cookies.set('user', JSON.stringify(user))
+export const setCookies = async (key: string, value: string) => {
+    Cookies.set(key, value)
 }
 
 export const emailToUsername = async (email: string) => {

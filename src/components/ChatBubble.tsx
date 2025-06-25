@@ -2,9 +2,19 @@ import Cookies from "js-cookie";
 import moment from "moment";
 import React from "react";
 
-const ChatBubble = ({ data }: { data: any }) => {
+interface Props {
+  id: string
+  createdAt: string
+  message: string
+  isSender: boolean
+  onSeen: () => void
+  isRead: boolean
+}
+
+const ChatBubble = ({ id, createdAt, message, isRead, isSender  }: Props) => {
   const userId = JSON.parse(Cookies.get("user")!)._id;
-  const isSender = data.senderId === userId;
+
+  console.log(isSender, 'issen')
 
   return (
     <div className={`flex ${isSender ? "justify-end" : "justify-start"} my-[1px]`}>
@@ -15,9 +25,9 @@ const ChatBubble = ({ data }: { data: any }) => {
             : "bg-[#202D34] text-white rounded-tr-lg rounded-br-lg rounded-bl-lg"
         }`}
       >
-        <p className="break-words text-[15px] px-1">{data.message}</p>
+        <p className="break-words text-[15px] px-1">{message}</p>
         <p className="text-[11px] text-[#8696A0] self-end mt-1">
-          {moment(data.createdAt).format("HH:mm")}
+          {moment(createdAt).format("HH:mm")}
         </p>
       </div>
     </div>

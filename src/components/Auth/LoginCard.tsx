@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { loginApi } from "../../utils/api/authApi";
 import { toast } from 'react-hot-toast';
 import ProviderLoginButton from "../ProvideLoginButton";
@@ -7,35 +7,56 @@ import { GoogleIcon } from "../../icons/Google";
 import { GithubIcon } from "lucide-react";
 import { setCookies } from "../../lib/helpers"
 import { Link, useNavigate } from "react-router-dom"
+import { Schema, z } from 'zod'
+import Cookies from 'js-cookie'
 
 interface Props {
   error?: string | null
 
 }
 
+const schema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(3, "Password must contain 3 letter(s)"),
+});
+
+
 const LoginCard = ({ error = null }: Props) => {
 
-  const [email, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+
+  const [formData, setFormData] = useState<{[ key: string]: string}>({email: "", password: ""})
   const [loading, setLoading] = useState<boolean>(false)
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
 
   const handleSubmit = async () => {
 
     setLoading(true)
 
-    if (email.length < 1 || password.length < 1) {
-      toast.error('Email and Password cannot be empty')
+    const result = schema.safeParse(formData)
+
+    if (!result.success) {
+      const errorMap: { [key:string]: string} = {}
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          errorMap[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(errorMap);
       setLoading(false)
-      return false
+      return
+    } else {
+      setErrors({});
     }
 
     const res = await loginApi({
-      data: {
-        email: email,
-        password: password
-      }
+      data: result.data
     })
 
 
@@ -45,79 +66,81 @@ const LoginCard = ({ error = null }: Props) => {
       return
     }
 
-    await setCookies(res?.data.data.token, res?.data.data.user)
+    console.log(res, 'res')
+
+    await setCookies('token', res?.data.token)
+    await setCookies('user', JSON.stringify(res?.data.user))
+
+    setLoading(false)
 
     navigate('/home')
 
-  }
 
+  }
 
   return (
     <div className="flex w-full min-h-screen bg-gray-50">
 
-      {/* Left panel with illustration/brand */}
-      <div className="hidden lg:flex lg:w-1/2 bg-main-color flex-col items-center justify-center p-12 text-white">
-        <div className="max-w-md">
-          {/* <MessageCircle size={64} className="mb-8" /> */}
-          <h1 className="text-4xl font-bold mb-6">Connect with friends and teams</h1>
-          <p className="text-lg opacity-90">
-            Join thousands of users who trust ChatApp for their daily communication.
-            Fast, secure, and designed for modern teams.
-          </p>
-        </div>
-      </div>
-
       {/* Right panel with login form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+      <div className="w-screen flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center lg:hidden mb-6">
-              {/* <MessageCircle size={40} className="text-blue-600" /> */}
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Welcome back</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Welcome</h2>
             <p className="mt-2 text-gray-600">Please sign in to your account</p>
           </div>
 
           <form
             onSubmit={(e) => {
-              e.preventDefault(); // Prevent default form submission
-              handleSubmit(); // Call your submit function
+              e.preventDefault(); 
+              handleSubmit(); 
             }}
             className="space-y-6"
           >
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <div className="flex items-center">
+                <label htmlFor="email" className="block text-md font-semibold text-gray-700 mb-1">
+                  Email
+                </label>
+              </div>
+              <div className="flex flex-col items-start">
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  name="email"
+                  className={`w-full px-4 py-3 rounded-lg border text-black ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent`}
+                  placeholder="you@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <span className="text-red-500 text-sm">{errors.email ?? ''}</span>
+              </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-md font-semibold text-gray-700">
                   Password
                 </label>
                 <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-indigo-500">
                   Forgot password?
                 </Link>
               </div>
-              <input
-                id="password"
-                type="password"
-                required
-                className="w-full px-4 py-3 rounded-lg border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="flex flex-col items-start">
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  name="password"
+                  className={`w-full px-4 py-3 rounded-lg border text-black ${errors.password ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent`}
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <span className="text-red-500 text-sm">{errors.password ?? ''}</span>
+              </div>
             </div>
 
             {/* <div className="flex items-center">

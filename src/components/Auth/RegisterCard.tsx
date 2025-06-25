@@ -77,7 +77,7 @@ const RegisterCard = ({ }: Props) => {
     })
     setLoading(false)
 
-    await setCookies(res?.data.data.token, res?.data.data.user)
+    // await setCookies(res?.data.data.token, res?.data.data.user)
     
     router.push('/home')
 

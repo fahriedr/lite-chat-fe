@@ -21,7 +21,7 @@ interface RegisterProps {
 export const loginApi = async (props: LoginProps) => {
 
     const res  = await fetchApi({
-        url: '/api/login',
+        url: `${import.meta.env.VITE_API_URL}/user/login`,
         method: 'POST',
         data: props.data
     })
@@ -33,7 +33,7 @@ export const loginApi = async (props: LoginProps) => {
 export const registerApi = async (props: RegisterProps) => {
 
     const res = await fetchApi({
-        url: '/api/register',
+        url: `${import.meta.env.VITE_API_URL}/user/register`,
         method: 'POST',
         data: props.data
     })

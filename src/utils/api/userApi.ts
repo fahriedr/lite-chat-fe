@@ -4,7 +4,7 @@ import type { User } from "../../types"
 
 export const getProfileApi = async () => {
     const res  = await fetchApi({
-        url: '/api/profile',
+        url: `${import.meta.env.VITE_API_URL}/profile`,
         method: 'GET'
     })
 
@@ -15,7 +15,7 @@ export const getProfileApi = async () => {
 
 export const getUsers = async (query: string) => {
     const res = await fetchApi({
-        url: `/api/users/search?query=${query}`,
+        url: `${import.meta.env.VITE_API_URL}/users/search?query=${query}`,
         method: 'GET'
     })
 
