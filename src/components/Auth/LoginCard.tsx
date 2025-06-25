@@ -66,8 +66,6 @@ const LoginCard = ({ error = null }: Props) => {
       return
     }
 
-    console.log(res, 'res')
-
     await setCookies('token', res?.data.token)
     await setCookies('user', JSON.stringify(res?.data.user))
 

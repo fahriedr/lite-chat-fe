@@ -14,8 +14,6 @@ interface Props {
 const ChatBubble = ({ id, createdAt, message, isRead, isSender  }: Props) => {
   const userId = JSON.parse(Cookies.get("user")!)._id;
 
-  console.log(isSender, 'issen')
-
   return (
     <div className={`flex ${isSender ? "justify-end" : "justify-start"} my-[1px]`}>
       <div

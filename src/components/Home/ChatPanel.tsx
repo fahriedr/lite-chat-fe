@@ -46,9 +46,6 @@ const ChatPanel = () => {
 
     updateUnreadMessage()
   };
-
-  console.log(user)
-  console.log(messages, 'mess')
   
 
   useEffect(() => {
