@@ -35,7 +35,7 @@ const ChatPanel = () => {
     const newMessage = res?.data.data;
     if (newMessage) {
       addMessage(newMessage);
-      sendMessage(newMessage);
+      // sendMessage(newMessage);
       messageUpdate(newMessage);
       setTimeout(scrollToBottom, 100); // Ensure scrolling after state updates
     }

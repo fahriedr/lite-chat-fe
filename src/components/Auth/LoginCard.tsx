@@ -7,8 +7,7 @@ import { GoogleIcon } from "../../icons/Google";
 import { GithubIcon } from "lucide-react";
 import { setCookies } from "../../lib/helpers"
 import { Link, useNavigate } from "react-router-dom"
-import { Schema, z } from 'zod'
-import Cookies from 'js-cookie'
+import { z } from 'zod'
 
 interface Props {
   error?: string | null

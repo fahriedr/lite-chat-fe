@@ -13,31 +13,33 @@ import { useSearchPanelStore } from '../../stores/search-panel';
 
 const ChatCard = () => {
 
-  const { loading, selectedConversation, messageUpdate} = useConversationStore(state => state);
+  const { loading, selectedConversation, messageUpdate } = useConversationStore(state => state);
   const { addMessage } = useMessageStore(state => state);
-  const {user} = useUserStore((state) => state)
+  const { user } = useUserStore((state) => state)
   const userId = user?._id
-  const {isOpen} = useSearchPanelStore((state) => state)
+  const { isOpen } = useSearchPanelStore((state) => state)
 
   useEffect(() => {
     pusherClient.subscribe('lite-chat');
 
     const handleMessage = (message: Message) => {
-        if (message.receiverId === userId) {
-          messageUpdate(message)
-          if(message.senderId === selectedConversation?.friendId){
-            addMessage(message);
-          }
+      if (message.receiverId === userId) {
+        messageUpdate(message)
+        if (message.senderId === selectedConversation?.friendId) {
+          addMessage(message);
         }
+      }
     };
 
     pusherClient.bind('upcoming-message', handleMessage);
 
     return () => {
-        pusherClient.unbind('upcoming-message', handleMessage);
-        pusherClient.unsubscribe('lite-chat');
+      pusherClient.unbind('upcoming-message', handleMessage);
+      pusherClient.unsubscribe('lite-chat');
     };
-});
+  });
+
+  console.log(userId, 'user')
 
 
   const renderChatPanel = () => {
@@ -52,7 +54,7 @@ const ChatCard = () => {
 
   return (
     <div className='flex bg-[#111B21] w-full h-full'>
-      <SearchPanel isOpen={isOpen}/>
+      <SearchPanel isOpen={isOpen} />
       <SidePanel />
       {renderChatPanel()}
     </div>

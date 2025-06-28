@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import ContactCard from "../../components/Home/ContactCard";
-import {  getMessagesApi } from "../../utils/api/messagesApi";
+import { getMessagesApi } from "../../utils/api/messagesApi";
 import { useMessageStore } from "../../stores/messages";
 import { useConversationStore } from "../../stores/conversation";
 import { lastText, logout } from "../../lib/helpers";
@@ -97,11 +97,26 @@ const SidePanel = () => {
         <span className="font-bold text-2xl">Chats</span>
         <div className="flex flex-row space-x-4 items-center">
           <Tooltip text="Start new chat">
-            <div className="cursor-pointer rounded-full p-[4px] hover:bg-gray-500" onClick={newChatOnClick}>
+            <div className="cursor-pointer rounded-full p-[8px] hover:bg-gray-500" onClick={newChatOnClick}>
               <NewChat />
             </div>
           </Tooltip>
-          <button onClick={logoutClick} className="bg-[#111B21] p-2 text-xs font-semibold rounded-md">Logout</button>
+          <Tooltip text="Logout">
+            <div className="cursor-pointer hover:bg-gray-700 rounded-full p-2" onClick={logoutClick}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M13 4H7a2 2 0 00-2 2v12a2 2 0 002 2h6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Tooltip>
         </div>
       </div>
 
