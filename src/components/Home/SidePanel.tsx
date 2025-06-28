@@ -55,7 +55,7 @@ const SidePanel = () => {
       setSelectedConversation(dataConversation);
       const res = await getMessagesApi(data.participants._id);
 
-      setMessage(res?.data.data)
+      setMessage(res?.data.data.reverse())
       conversationLoadingAction(false);
     } catch (err) {
       console.error(err);

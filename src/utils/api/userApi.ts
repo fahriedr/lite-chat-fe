@@ -15,7 +15,7 @@ export const getProfileApi = async () => {
 
 export const getUsers = async (query: string) => {
     const res = await fetchApi({
-        url: `${import.meta.env.VITE_API_URL}/users/search?query=${query}`,
+        url: `${import.meta.env.VITE_API_URL}/user/search/${query}`,
         method: 'GET'
     })
 

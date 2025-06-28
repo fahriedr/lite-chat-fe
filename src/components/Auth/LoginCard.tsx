@@ -191,7 +191,7 @@ const LoginCard = ({ error = null }: Props) => {
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               {"Dont have an account?"}
-              <Link to="/signup" className="font-medium text-blue-600 hover:text-indigo-500">
+              <Link to="/register" className="font-medium text-blue-600 hover:text-indigo-500">
                 {' '}Sign up
               </Link>
             </p>

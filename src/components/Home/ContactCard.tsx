@@ -17,7 +17,7 @@ const ContactCard = ({ id, name, lastText, time, avatar = 'https://robohash/rand
 
   const { selectedConversation } = useConversationStore((state) => state)
 
-  const lastMessageTime = (date: any) => {
+  const lastMessageTime = (date: string) => {
     const paramDate = moment(date).format('DD/MM/YY')
 
     const now = moment().format('DD/MM/YY')
@@ -50,7 +50,7 @@ const ContactCard = ({ id, name, lastText, time, avatar = 'https://robohash/rand
         <div className="ml-4 flex flex-1 flex-row justify-between items-center border-b border-gray-700 py-2">
           <div className="flex flex-col">
             <p className="text-white font-medium">{name}</p>
-            <p className="text-gray-400 mt-1 text-sm truncate">{lastText}</p>
+            <p className="text-gray-400 mt-1 text-sm truncate text-start">{lastText}</p>
           </div>
 
           <div className="flex flex-row items-center gap-2">
@@ -67,7 +67,7 @@ const ContactCard = ({ id, name, lastText, time, avatar = 'https://robohash/rand
               <></>
             }
             <div className="flex flex-row">
-              <p className="text-xs text-gray-400">{lastMessageTime(time)}</p>
+              <p className="text-xs text-gray-400">{lastMessageTime(time as string)}</p>
             </div>
           </div>
         </div>

@@ -3,12 +3,12 @@ import { create } from 'zustand'
 import type { Message } from '../types'
 
 export interface MessagesState {
-    messages: Array<[]>,
+    messages: Message[],
     setMessage: (props: Array<[]>) => void,
     addMessage: (props: Message) => void
 }
 
-const initialState: Array<[]> = []
+const initialState: Message[] = []
 
 export const useMessageStore = create<MessagesState>((set) => ({
     messages: initialState,

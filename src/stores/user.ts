@@ -11,11 +11,12 @@ const initialState: User = {
     username: '',
     fullname: '',
     email: '',
-    avatar: ''
+    avatar: '',
+    _id: ''
 }
 
 export const useUserStore = create<UserState>()((set) => ({
-    user: null,
+    user: initialState,
     userAction: (props: User) => set((state) => ({ user: props })),
     resetUser: () => set((state) => ({user: null}))
 }))

@@ -13,8 +13,8 @@ import Loading from "../Loading";
 const ChatPanel = () => {
 
   const { user } = useUserStore((state) => state);
-  const { messages, setMessage, addMessage } = useMessageStore((state) => state);
-  const { conversation, selectedConversation, loading, messageUpdate, updateUnreadMessage } = useConversationStore((state) => state);
+  const { messages, addMessage } = useMessageStore((state) => state);
+  const { selectedConversation, loading, messageUpdate, updateUnreadMessage } = useConversationStore((state) => state);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,7 +42,7 @@ const ChatPanel = () => {
   };
 
   const onSeen = async (id: string) => {
-    const res = await updateMessageStatusApi(id);
+    await updateMessageStatusApi(id);
 
     updateUnreadMessage()
   };
@@ -55,7 +55,7 @@ const ChatPanel = () => {
   return (
     <div className="flex flex-col w-full h-screen">
       {/* Header */}
-      <div className="flex flex-row w-full px-4 items-center bg-[#202C33] h-[72px] py-[7px] justify-between">
+      <div className="flex flex-row w-full px-4 items-center bg-[#202C33] h-[75px] py-[7px] justify-between">
         <div className="flex flex-row items-center">
           <img
             className="border-solid border rounded-full stroke-black"
@@ -75,13 +75,13 @@ const ChatPanel = () => {
         <Loading />
       ) : (
         <div className="flex flex-col flex-1 overflow-y-auto bg-[url('/images/wa-bg.svg')] px-8">
-          {messages.reverse().map((data, i) => (
+          {messages.map((data, i) => (
             <ChatBubble
               key={i}
               id={data._id}
               createdAt={data.createdAt}
               message={data.message}
-              isSender={user?.id === data.senderId}
+              isSender={user?._id == data.senderId}
               onSeen={onSeen}
               isRead={data.isRead ?? false}
             />

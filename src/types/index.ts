@@ -1,7 +1,7 @@
 import type { AxiosResponseHeaders, RawAxiosResponseHeaders } from "axios";
 
 export interface User {
-    id?: string,
+    _id?: string,
     fullname: string,
     username: string,
     email: string,

@@ -1,42 +1,33 @@
 'use client';
 import React, { useState } from "react";
-import TextInput from "@/components/UI/TextInput";
-import { registerApi } from "@/utils/api/authApi";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import TextInput from "../../components/TextInput";
+import { registerApi } from "../../utils/api/authApi";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from 'zod'
 import toast from "react-hot-toast";
-import { setCookies } from "@/lib/helper";
-import ProviderLoginButton from "../UI/ProvideLoginButton";
-import { GoogleIcon } from "@/icons/Google";
-import { signIn } from "next-auth/react";
+import ProviderLoginButton from "../ProvideLoginButton";
+import { GoogleIcon } from "../../icons/Google";
 import { GithubIcon } from "lucide-react";
+import { setCookies } from "../../lib/helpers";
 
-interface Props {
-  
-}
+const schema = z.object({
+  fullname: z.string().min(6).max(30),
+  username: z.string().min(6).max(12).trim(),
+  email: z.string().email(),
+  password: z.string().min(6).max(30),
+  confirmPassword: z.string().max(30)
+}).superRefine(({confirmPassword, password}, ctx) => {
+    if(confirmPassword !== password) {
+        ctx.addIssue({
+            code: 'custom',
+            message: 'Password not match!'
+        })
+    }
+})
 
+const RegisterCard = () => {
 
-
-const RegisterCard = ({ }: Props) => {
-
-  const schema = z.object({
-    fullname: z.string().min(6).max(30),
-    username: z.string().min(6).max(12).trim(),
-    email: z.string().email(),
-    password: z.string().min(6).max(30),
-    confirmPassword: z.string().max(30)
-  }).superRefine(({confirmPassword, password}, ctx) => {
-      if(confirmPassword !== password) {
-          ctx.addIssue({
-              code: 'custom',
-              message: 'Password not match!'
-          })
-      }
-  })
-
-  const router = useRouter()
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
   const [fullname, setFullname] = useState('')
@@ -77,28 +68,15 @@ const RegisterCard = ({ }: Props) => {
     })
     setLoading(false)
 
-    // await setCookies(res?.data.data.token, res?.data.data.user)
-    
-    router.push('/home')
+    await setCookies('token', res?.data.data.token)
+    await setCookies('user', res?.data.data.user)
 
+    navigate('/home')
 
   }
   return (
     <div className="flex w-full min-h-screen bg-gray-50">
-      {/* Left panel with illustration/brand */}
-      <div className="hidden lg:flex lg:w-1/2 bg-main-color flex-col items-center justify-center p-12 text-white">
-        <div className="max-w-md">
-          {/* <MessageCircle size={64} className="mb-8" /> */}
-          <h1 className="text-4xl font-bold mb-6">Connect with friends and teams</h1>
-          <p className="text-lg opacity-90">
-            Join thousands of users who trust ChatApp for their daily communication. 
-            Fast, secure, and designed for modern teams.
-          </p>
-        </div>
-      </div>
-
-      {/* Right panel with login form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+      <div className="w-full  flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center lg:hidden mb-6">
@@ -108,14 +86,7 @@ const RegisterCard = ({ }: Props) => {
             <p className="mt-2 text-gray-600">Please sign in to your account</p>
           </div>
 
-          {/* {error && (
-            <div className="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg">
-              {error}
-            </div>
-          )} */}
-
           <div className="space-y-6">
-
             <TextInput
               id="fullname"
               label="Fullname"
