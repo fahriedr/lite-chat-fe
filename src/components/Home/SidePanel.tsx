@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ContactCard from "../../components/Home/ContactCard";
 import { getMessagesApi } from "../../utils/api/messagesApi";
 import { useMessageStore } from "../../stores/messages";

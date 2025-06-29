@@ -9,18 +9,13 @@ import { setCookies } from "../../lib/helpers"
 import { Link, useNavigate } from "react-router-dom"
 import { z } from 'zod'
 
-interface Props {
-  error?: string | null
-
-}
-
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(3, "Password must contain 3 letter(s)"),
 });
 
 
-const LoginCard = ({ error = null }: Props) => {
+const LoginCard = () => {
 
 
   const [formData, setFormData] = useState<{ [key: string]: string }>({ email: "", password: "" })

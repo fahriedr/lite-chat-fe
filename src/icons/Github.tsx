@@ -1,4 +1,4 @@
-export const GithubIcon = ({ size = 24, className = "" }) => (
+export const GithubIcon = ({ size = 24 }) => (
     <svg
         className={`w-${size} h-${size}`}
         fill="currentColor"

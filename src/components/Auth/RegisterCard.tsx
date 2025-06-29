@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import { useState } from "react";
 import TextInput from "../../components/TextInput";
 import { registerApi } from "../../utils/api/authApi";
 import { Link, useNavigate } from "react-router-dom";

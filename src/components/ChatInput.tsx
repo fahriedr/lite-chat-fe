@@ -4,7 +4,7 @@ interface ChatInputProps {
   onSendMessage?: (message: string) => void;
 }
 
-const ChatInput = ({ onSendMessage, ...props }: ChatInputProps) => {
+const ChatInput = ({ onSendMessage }: ChatInputProps) => {
   const [text, setText] = React.useState<string>("");
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 

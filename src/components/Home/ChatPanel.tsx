@@ -3,10 +3,9 @@
 import { useConversationStore } from "../../stores/conversation";
 import { useMessageStore } from "../../stores/messages";
 import { sendMessageApi, updateMessageStatusApi } from "../../utils/api/messagesApi";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ChatBubble from "../ChatBubble";
 import ChatInput from "../ChatInput"
-import { sendMessage } from "../../stores/actions/message.actions";
 import { useUserStore } from "../../stores/user";
 import Loading from "../Loading";
 

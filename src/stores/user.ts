@@ -17,6 +17,6 @@ const initialState: User = {
 
 export const useUserStore = create<UserState>()((set) => ({
     user: initialState,
-    userAction: (props: User) => set((state) => ({ user: props })),
-    resetUser: () => set((state) => ({user: null}))
+    userAction: (props: User) => set(() => ({ user: props })),
+    resetUser: () => set(() => ({user: null}))
 }))

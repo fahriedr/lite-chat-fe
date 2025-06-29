@@ -6,7 +6,7 @@ interface ProviderLoginButtonParam {
   name: string
 }
 
-const ProviderLoginButton: React.FC<ProviderLoginButtonParam> = ({ icon, onClick, name }) => {
+const ProviderLoginButton: React.FC<ProviderLoginButtonParam> = ({ icon, onClick }) => {
   return (
     <button
       onClick={onClick}

@@ -1,5 +1,5 @@
 import { useConversationStore } from '../../stores/conversation';
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ChatPanel from '../Home/ChatPanel';
 import EmptyChatPanel from '../Home/EmptyChatPanel';
 import SidePanel from '../Home/SidePanel';

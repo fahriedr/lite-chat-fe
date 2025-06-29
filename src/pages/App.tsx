@@ -4,7 +4,7 @@ import ChatSvg from '../../public/images/chat.svg'
 import { useState } from 'react';
 function App() {
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide] = useState(0);
 
   const slides = [
     {

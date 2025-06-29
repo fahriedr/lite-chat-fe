@@ -1,4 +1,4 @@
-import type { Conversation, Message, User } from '../types'
+import type { Conversation, Message } from '../types'
 import { create } from 'zustand'
 
 interface SelectedConversation {
@@ -25,10 +25,10 @@ export const useConversationStore = create<conversationState>()((set) => ({
     selectedConversation: null,
     conversation: [],
     loading: false,
-    setSelectedConversation: (props: SelectedConversation) => set((state) => ({ selectedConversation: props })),
-    conversationLoadingAction: (props: boolean) => set((state) => ({ loading: props })),
-    conversationAction: (props: any) => set((state) => ({ conversation: props})),
-    resetConversation: () => set((state) => ({ conversation: [] })),
+    setSelectedConversation: (props: SelectedConversation) => set(() => ({ selectedConversation: props })),
+    conversationLoadingAction: (props: boolean) => set(() => ({ loading: props })),
+    conversationAction: (props: any) => set(() => ({ conversation: props})),
+    resetConversation: () => set(() => ({ conversation: [] })),
     messageUpdate: (newMessage: Message) =>
         set((state) => {
             // // Find conversation that matches either sender or receiver ID

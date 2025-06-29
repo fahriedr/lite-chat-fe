@@ -9,5 +9,5 @@ export interface ErrorState {
 export const useError = create<ErrorState>((set) => ({
     isError: false,
     errorMessage: null,
-    setError: () => set((state: ErrorState) => ({ isError: true })),
+    setError: () => set(() => ({ isError: true })),
 }))

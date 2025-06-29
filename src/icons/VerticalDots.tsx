@@ -1,5 +1,3 @@
-import React from "react";
-
 const VerticalDots = ({ size = 24, className = "" }) => {
   return (
     <svg

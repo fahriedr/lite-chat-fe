@@ -17,7 +17,7 @@ function Errors(props: {errors?: string[]}){
   return <div><span className="text-red-500">{props.errors.map((err, i) => <p key={i}>{err}</p>)}</span></div>
 }
 
-const TextInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({id, label, placeholder, onChange, value, type, error, ...otherProps }, ref) => {
+const TextInput: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({id, label, placeholder, onChange, value, type, error }) => {
   return (
     <div>
       <label htmlFor="email" className="text-start block text-sm font-medium text-gray-700 mb-1">

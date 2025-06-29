@@ -1,7 +1,6 @@
 import { useConversationStore } from "../../stores/conversation";
 import moment from "moment";
 import CircleChipBadge from "../../components/ChipBadge";
-import type { Conversation } from "../../types";
 
 interface Props {
   id?: string;
@@ -10,7 +9,7 @@ interface Props {
   time?: string;
   avatar?: string;
   unreadMessage?: number;
-  onPress?: (conversation: Conversation) => void;
+  onPress?: () => void;
 }
 
 const ContactCard = ({ id, name, lastText, time, avatar = 'https://robohash/random', onPress, unreadMessage = 0 }: Props) => {

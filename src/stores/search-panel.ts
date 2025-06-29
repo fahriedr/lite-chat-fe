@@ -7,5 +7,5 @@ interface SearchPanel {
 
 export const useSearchPanelStore = create<SearchPanel>((set) => ({
     isOpen: false,
-    setSearchPanelStatus: (props: boolean) => set((state) => ({ isOpen: props })),
+    setSearchPanelStatus: (props: boolean) => set(() => ({ isOpen: props })),
 }))

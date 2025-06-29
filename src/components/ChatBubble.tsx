@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Props  = {
   id: string

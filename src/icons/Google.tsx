@@ -1,4 +1,4 @@
-export const GoogleIcon = ({ size = 24, className = "" }) => (
+export const GoogleIcon = ({ size = 24 }) => (
     <svg
         className={`w-${size} h-${size}`}
         viewBox="0 0 533.5 544.3"

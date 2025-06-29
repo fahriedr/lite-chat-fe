@@ -1,4 +1,4 @@
-import type { CustomResponse, CustomError, User as UserType } from '../types/index'
+import type { CustomResponse, CustomError } from '../types/index'
 import axios, { type AxiosResponse } from 'axios'
 import Cookies from 'js-cookie'
 
