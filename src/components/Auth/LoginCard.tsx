@@ -23,14 +23,14 @@ const schema = z.object({
 const LoginCard = ({ error = null }: Props) => {
 
 
-  const [formData, setFormData] = useState<{[ key: string]: string}>({email: "", password: ""})
+  const [formData, setFormData] = useState<{ [key: string]: string }>({ email: "", password: "" })
   const [loading, setLoading] = useState<boolean>(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
 
@@ -41,7 +41,7 @@ const LoginCard = ({ error = null }: Props) => {
     const result = schema.safeParse(formData)
 
     if (!result.success) {
-      const errorMap: { [key:string]: string} = {}
+      const errorMap: { [key: string]: string } = {}
       result.error.errors.forEach((err) => {
         if (err.path[0]) {
           errorMap[err.path[0] as string] = err.message;
@@ -75,6 +75,14 @@ const LoginCard = ({ error = null }: Props) => {
 
   }
 
+  const loginWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/user/auth/google`;
+  };
+
+  const loginWithGithub = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/user/auth/github`;
+  };
+
   return (
     <div className="flex w-full min-h-screen bg-gray-50">
 
@@ -90,8 +98,8 @@ const LoginCard = ({ error = null }: Props) => {
 
           <form
             onSubmit={(e) => {
-              e.preventDefault(); 
-              handleSubmit(); 
+              e.preventDefault();
+              handleSubmit();
             }}
             className="space-y-6"
           >
@@ -175,15 +183,15 @@ const LoginCard = ({ error = null }: Props) => {
 
           <div className="flex flex-row gap-x-4">
             <ProviderLoginButton
-              icon={<GoogleIcon size={6}/>}
+              icon={<GoogleIcon size={6} />}
               name="Google"
-              onClick={() => {}}
+              onClick={loginWithGoogle}
             />
 
             <ProviderLoginButton
-              icon={<GithubIcon size={24}/>}
+              icon={<GithubIcon size={24} />}
               name="Github"
-              onClick={() => {}}
+              onClick={loginWithGithub}
             />
           </div>
 

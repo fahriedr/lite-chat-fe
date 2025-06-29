@@ -76,15 +76,27 @@ export const fetchApi = async (props: FetchProps) => {
 }
 
 export const checkAuth = () => {
+    const token = Cookies.get('token')
+    const userStr = Cookies.get('user')
 
-    const checkToken = Cookies.get('token')
-    const checkUser = Cookies.get('user')
-
-    if (!checkToken || !checkUser) {
+    if (!token || !userStr) {
         return false
     }
 
-    return JSON.parse(checkUser)
+    try {
+        const user = JSON.parse(userStr)
+
+        // Optional: validate expected fields
+        if (!user._id || !user.email || !user.username) {
+            return false
+        }
+
+        return user
+    } catch (err) {
+        Cookies.remove('token')
+        Cookies.remove('user')
+        return false
+    }
 }
 
 export const logout = async () => {

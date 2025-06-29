@@ -39,8 +39,6 @@ const ChatCard = () => {
     };
   });
 
-  console.log(userId, 'user')
-
 
   const renderChatPanel = () => {
     if (!selectedConversation) return <EmptyChatPanel />;

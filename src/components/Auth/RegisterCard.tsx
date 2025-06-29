@@ -74,6 +74,14 @@ const RegisterCard = () => {
     navigate('/home')
 
   }
+
+   const loginWithGoogle = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/user/auth/google`;
+  };
+
+  const loginWithGithub = () => {
+    window.location.href = `${import.meta.env.VITE_API_URL}/user/auth/github`;
+  };
   return (
     <div className="flex w-full min-h-screen bg-gray-50">
       <div className="w-full  flex items-center justify-center p-8">
@@ -137,18 +145,6 @@ const RegisterCard = () => {
               error={errors}
             />
 
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                Remember me
-              </label>
-            </div>
-
             <button
               onClick={handleSubmit}
               type="button"
@@ -175,20 +171,20 @@ const RegisterCard = () => {
             <ProviderLoginButton
               icon={<GoogleIcon size={6}/>}
               name="Google"
-              onClick={() => signIn("google", { callbackUrl: "/api/auth/callback/google" })}
+              onClick={loginWithGoogle}
             />
 
             <ProviderLoginButton
               icon={<GithubIcon size={24}/>}
               name="Github"
-              onClick={() => signIn("github", { callbackUrl: "/api/auth/callback/github" })}
+              onClick={loginWithGithub}
             />
           </div>
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <Link href="/login" className="font-medium text-blue-600 hover:text-indigo-500">
+              <Link to="/login" className="font-medium text-blue-600 hover:text-indigo-500">
                 Sign In
               </Link>
             </p>

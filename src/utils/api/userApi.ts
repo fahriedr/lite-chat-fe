@@ -23,3 +23,14 @@ export const getUsers = async (query: string) => {
 
     return data
 }
+
+export const getUserProfile = async (email: string) => {
+    const res = await fetchApi({
+        url: `${import.meta.env.VITE_API_URL}/user/profile?email=${email}`,
+        method: 'GET'
+    })
+
+    const data: User[] | [] = res?.data.data
+
+    return data
+}
