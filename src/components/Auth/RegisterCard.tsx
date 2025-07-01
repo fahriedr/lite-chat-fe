@@ -90,8 +90,8 @@ const RegisterCard = () => {
             <div className="flex items-center justify-center lg:hidden mb-6">
               {/* <MessageCircle size={40} className="text-blue-600" /> */}
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Welcome back</h2>
-            <p className="mt-2 text-gray-600">Please sign in to your account</p>
+            <h2 className="text-3xl font-bold text-gray-900">Welcome</h2>
+            <p className="mt-2 text-gray-600">Please fill out the form below to register.</p>
           </div>
 
           <div className="space-y-6">
@@ -184,8 +184,10 @@ const RegisterCard = () => {
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="font-medium text-blue-600 hover:text-indigo-500">
-                Sign In
+              <Link to="/login" className="font-medium ">
+                <span className="text-blue-500">
+                  Sign In
+                </span>
               </Link>
             </p>
           </div>

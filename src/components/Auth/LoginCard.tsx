@@ -124,9 +124,9 @@ const LoginCard = () => {
                 <label htmlFor="password" className="block text-md font-semibold text-gray-700">
                   Password
                 </label>
-                <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-indigo-500">
+                {/* <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-indigo-500">
                   Forgot password?
-                </Link>
+                </Link> */}
               </div>
               <div className="flex flex-col items-start">
                 <input
@@ -192,9 +192,11 @@ const LoginCard = () => {
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              {"Dont have an account?"}
+              {"Dont have an account? "}
               <Link to="/register" className="font-medium text-blue-600 hover:text-indigo-500">
-                {' '}Sign up
+                <span className="text-blue-500">
+                  Sign In
+                </span>
               </Link>
             </p>
           </div>

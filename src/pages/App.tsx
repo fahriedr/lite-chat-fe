@@ -1,19 +1,28 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
 import '../App.css'
-import ChatSvg from '../../public/images/chat.svg'
-import { useState } from 'react';
+// import ChatSvg from '../../public/images/chat.svg'
+// import { useState } from 'react';
+import Loading from '../components/Loading';
+import { useNavigate } from 'react-router-dom';
 function App() {
 
-  const [currentSlide] = useState(0);
+  // const [currentSlide] = useState(0);
 
-  const slides = [
-    {
-      title: "Get Started",
-      description: "Start with signing up or sign in.",
-      icon: <img src={ChatSvg} alt="Login image" />
-    }
-  ];
+  // const slides = [
+  //   {
+  //     title: "Get Started",
+  //     description: "Start with signing up or sign in.",
+  //     icon: <img src={ChatSvg} alt="Login image" />
+  //   }
+  // ];
 
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate("/login")
+  }, [])
+  
 
   return (
     <>
@@ -25,9 +34,11 @@ function App() {
       </head>
       <main className="fixed inset-0 m-4">
         <div className="app-container">
-          <div className="min-h-screen bg-main-color flex flex-col items-center justify-center p-4">
+          <div className='flex w-full h-screen justify-center items-center'>
+            <Loading/>
+          </div>
+          {/* <div className="min-h-screen bg-main-color flex flex-col items-center justify-center p-4">
             <div className="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-xl">
-              {/* Main content */}
               <div className="px-8 py-10 text-center">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">
                   {slides[currentSlide].title}
@@ -36,12 +47,10 @@ function App() {
                   {slides[currentSlide].description}
                 </p>
 
-                {/* Illustration */}
                 <div className="mb-12">
                   {slides[currentSlide].icon}
                 </div>
 
-                {/* Action buttons */}
                 <div className="space-y-3">
                   <Link
                     to="/signup"
@@ -59,7 +68,7 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </main>
     </>
